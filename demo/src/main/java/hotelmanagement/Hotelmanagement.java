@@ -63,23 +63,22 @@ public class Hotelmanagement extends JFrame implements ActionListener{
         clickButton.addActionListener(this);
         image.add(clickButton);
 
-
-
-// JButton next=new JButton("Next");
-// next.setBounds(1000,550,100,50);
-// next.setBackground(Color.BLACK);
-// next.setForeground(Color.white);
-// next.setFont(new Font("serif",Font.PLAIN,20));
-// image.add(next);
-
         setVisible(true);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent ae){
+        setVisible(false);
+        new Login();
+    }
+
     public static void main(String[] args) {
         new Hotelmanagement();
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    // }
+   
 }
