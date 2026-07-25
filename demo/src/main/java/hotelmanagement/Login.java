@@ -1,16 +1,17 @@
 package hotelmanagement;
-import javax.swing.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener {
     JTextField tfusername;
     JPasswordField tfpsswrd;
+    JButton loginBtn;
 
-Login() {
+    Login() {
         setTitle("Login Page");
-
         setLayout(new BorderLayout());
 
         // LEFT SIDE IMAGE
@@ -43,7 +44,7 @@ Login() {
         gbc.gridx = 0;
         gbc.gridy = 1;
         loginPanel.add(lblusername, gbc);
-        // code for entering username
+
         tfusername = new JTextField(18);
         tfusername.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         gbc.gridx = 1;
@@ -55,24 +56,23 @@ Login() {
         gbc.gridx = 0;
         gbc.gridy = 2;
         loginPanel.add(lblpsswrd, gbc);
-        // code for entering user's passwrd
+
         tfpsswrd = new JPasswordField(18);
         tfpsswrd.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         gbc.gridx = 1;
         gbc.gridy = 2;
         loginPanel.add(tfpsswrd, gbc);
 
-//button
-
-        JButton loginBtn = new JButton("Login");
+        // BUTTON
+        loginBtn = new JButton("Login");
         loginBtn.setBackground(new Color(0, 123, 255));
         loginBtn.setForeground(Color.WHITE);
         loginBtn.setFocusPainted(false);
         loginBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
         loginBtn.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        loginBtn.addActionListener( this);
+        loginBtn.addActionListener(this);
 
-        // Rounded button fix
+        // Rounded button UI fix
         loginBtn.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
@@ -98,13 +98,42 @@ Login() {
         setVisible(true);
     }
 
-@Override
-public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-} 
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String username = tfusername.getText().trim();
+        String password = new String(tfpsswrd.getPassword());
 
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter both username and password.");
+            return;
+        }
 
-public static void main(String[] args) {
-    new Login();
-}}
+        // Using parameterized queries to prevent SQL injection
+        String query = "SELECT * FROM login WHERE Username = ? AND Password = ?";
+
+        Conn c = new Conn();
+        try (PreparedStatement pstmt = c.c.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    setVisible(false);
+                    new Dashboard();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid username or password. Try again!");
+                    tfusername.setText("");
+                    tfpsswrd.setText("");
+                    tfusername.requestFocus();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database connection error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        new Login();
+    }
+}
