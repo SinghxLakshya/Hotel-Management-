@@ -59,10 +59,8 @@ JMenuItem ademp;
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        // // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         if(ae.getSource() == ademp){
-            // setVisible(false);
+            
             new Addemp();
         }
     }
