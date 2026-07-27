@@ -1,10 +1,13 @@
 package hotelmanagement;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class Dashboard extends JFrame {
-
+public class Dashboard extends JFrame implements ActionListener {
+JMenuItem ademp;
     public Dashboard() {
 
         setBounds(0, 0, 1550, 1000);
@@ -34,8 +37,9 @@ public class Dashboard extends JFrame {
         recep.setForeground(new Color(0, 123, 255));
         hotel.add(recep);
 
-       JMenuItem ademp=new JMenuItem("Add employee");
+       ademp=new JMenuItem("Add employee");
         ademp.setForeground(new Color(0, 123, 255));
+        ademp.addActionListener(this);
         ad.add(ademp);
 
        JMenuItem adrms=new JMenuItem("Add rooms");
@@ -51,5 +55,15 @@ public class Dashboard extends JFrame {
 
     public static void main(String[] args) {
         new Dashboard();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        // // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if(ae.getSource() == ademp){
+            // setVisible(false);
+            new Addemp();
+        }
     }
 }
