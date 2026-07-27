@@ -1,17 +1,22 @@
 package hotelmanagement;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
 
-public class Addemp extends JFrame {
+public class Addemp extends JFrame implements ActionListener {
+
+    JTextField lname, tage, slryField, phnField, emField;
+    JRadioButton rbg, female;
+    JButton submit, cncl;
+    JComboBox cjb;
+
     public Addemp() {
-        setLayout(null);
-        setBounds(300, 100, 850, 540);
-        getContentPane().setBackground(Color.white);
 
         // all the labels are placed here
         JLabel name = new JLabel("Name");
@@ -19,7 +24,7 @@ public class Addemp extends JFrame {
         name.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(name);
 
-        JTextField lname = new JTextField();
+        lname = new JTextField();
         lname.setBounds(200, 40, 220, 30);
         add(lname);
 
@@ -27,7 +32,7 @@ public class Addemp extends JFrame {
         age.setBounds(60, 100, 120, 30);
         age.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(age);
-        JTextField tage = new JTextField();
+        tage = new JTextField();
         tage.setBounds(200, 100, 220, 30);
         add(tage);
 
@@ -35,13 +40,13 @@ public class Addemp extends JFrame {
         gnd.setBounds(60, 160, 120, 30);
         gnd.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(gnd);
-        JRadioButton rbg = new JRadioButton("Male");
+        rbg = new JRadioButton("Male");
         rbg.setBounds(200, 160, 70, 30);
         rbg.setFont(new Font("tahoma", Font.PLAIN, 14));
         rbg.setBackground(Color.white);
         add(rbg);
 
-        JRadioButton female = new JRadioButton("Female");
+        female = new JRadioButton("Female");
         female.setBounds(290, 160, 70, 30);
         female.setFont(new Font("tahoma", Font.PLAIN, 14));
         female.setBackground(Color.white);
@@ -59,7 +64,7 @@ public class Addemp extends JFrame {
 
         String str[] = { "Front Desk clerks", "Porters", "House Keeping", "Receptionist", "Roomservice",
                 "Kitchen staff", "Head-chef" };
-        JComboBox cjb = new JComboBox(str);
+        cjb = new JComboBox(str);
         cjb.setBounds(200, 220, 150, 30);
         cjb.setBackground(Color.white);
         add(cjb);
@@ -68,7 +73,7 @@ public class Addemp extends JFrame {
         slry.setBounds(60, 280, 120, 30);
         slry.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(slry);
-        JTextField slryField = new JTextField();
+        slryField = new JTextField();
         slryField.setBounds(200, 280, 220, 30);
         add(slryField);
 
@@ -76,18 +81,18 @@ public class Addemp extends JFrame {
         phn.setBounds(60, 340, 120, 30);
         phn.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(phn);
-        JTextField pFieldhn = new JTextField();
-        pFieldhn.setBounds(200, 340, 220, 30);
-        add(pFieldhn);
+        phnField = new JTextField();
+        phnField.setBounds(200, 340, 220, 30);
+        add(phnField);
         JLabel eml = new JLabel("Email");
         eml.setBounds(60, 400, 120, 30);
         eml.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(eml);
-        JTextField emField = new JTextField();
+        emField = new JTextField();
         emField.setBounds(200, 400, 220, 30);
         add(emField);
 
-        JButton submit = new JButton("Submit");
+        submit = new JButton("Submit");
         submit.setBounds(200, 450, 150, 30);
         submit.setFont(new Font("Arial", Font.BOLD, 16));
         submit.setFocusPainted(false);
@@ -95,6 +100,7 @@ public class Addemp extends JFrame {
         submit.setForeground(Color.WHITE);
         submit.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
         submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        submit.addActionListener(this);
 
         // Hover effect
         submit.addMouseListener(new MouseAdapter() {
@@ -109,13 +115,83 @@ public class Addemp extends JFrame {
             }
         });
         add(submit);
+        cncl = new JButton("Cancel");
+        cncl.setBounds(400, 450, 150, 30);
+        cncl.setFont(new Font("Arial", Font.BOLD, 16));
+        cncl.setFocusPainted(false);
+        cncl.setBackground(new Color(0, 0, 0, 200));
+        cncl.setForeground(Color.WHITE);
+        cncl.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        cncl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cncl.addActionListener(this);
 
-        // submit.setBounds(200,430,150,30);
-        // submit.setBackground(Color.white);
-        // submit.setForeground(Color.black);
+        // Hover effect
+        cncl.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 120, 215));
+                cncl.setForeground(Color.WHITE);
+            }
 
+            public void mouseExited(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 0, 0, 200));
+                cncl.setForeground(Color.WHITE);
+            }
+        });
+        add(cncl);
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/tenth.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(450, 450, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
+        image.setBounds(410, 70, 450, 380);
+        add(image);
+
+        setLayout(null);
+        setBounds(300, 100, 850, 540);
+        getContentPane().setBackground(Color.white);
         setVisible(true);
     }
+
+   public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == submit) {
+            String name = lname.getText();
+            String age = tage.getText();
+            String slry = slryField.getText();
+            String phn = phnField.getText();
+            String eml = emField.getText();
+
+            String gnd = null;
+            if (rbg.isSelected()) {
+                gnd = "Male";
+            } else if (female.isSelected()) {
+                gnd = "Female";
+            }
+
+            String job = (String) cjb.getSelectedItem();
+
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(null, "Name should not be empty");
+                return;
+            }
+
+            try {
+                Conn conn = new Conn();
+                String query = "insert into employee1 values('" + name + "','" + age + "','" + gnd + "','" + job + "','"
+                        + slry + "','" + phn + "','" + eml + "')";
+
+                conn.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Employee data added successfully");
+                setVisible(false);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == cncl) {
+            setVisible(false);
+            dispose();
+        }
+    }
+    
 
     public static void main(String[] args) {
         new Addemp();
