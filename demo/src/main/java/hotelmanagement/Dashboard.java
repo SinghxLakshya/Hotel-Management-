@@ -50,6 +50,7 @@ JMenuItem ademp,adrms;
        JMenuItem addrv=new JMenuItem("Add Drives");
         addrv.setForeground(new Color(0, 123, 255));
         ad.add(addrv);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setVisible(true);
     }

@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 
 public class Addroom extends JFrame implements ActionListener{
     JTextField tfroom,tfprice;
-    JComboBox avlcjb,stscjb,bedcjb,rmcjb;
+    JComboBox<String> avlcjb,stscjb,bedcjb,rmcjb;
     JButton submit,cncl;
     public Addroom(){
         
@@ -34,7 +34,7 @@ public class Addroom extends JFrame implements ActionListener{
         avl.setBounds(70,120,200,20);
         add(avl);
         String str[] = {"Available","Occupied" };
-        avlcjb = new JComboBox(str);
+        avlcjb = new JComboBox<>(str);
         avlcjb.setBounds(200, 120, 150, 30);
         avlcjb.setBackground(Color.white);
         add(avlcjb);
@@ -44,7 +44,7 @@ public class Addroom extends JFrame implements ActionListener{
         clean.setBounds(70,180,200,20);
         add(clean);
         String sts[] = {"Clean","Tidy" };
-        stscjb = new JComboBox(sts);
+        stscjb = new JComboBox<>(sts);
         stscjb.setBounds(200, 180, 150, 30);
         stscjb.setBackground(Color.white);
         add(stscjb);
@@ -54,7 +54,7 @@ public class Addroom extends JFrame implements ActionListener{
         bed.setBounds(70,240,200,20);
         add(bed);
         String bd[] = {"Single bed","Double bed","two single beds","Dormitory for kids" };
-        bedcjb = new JComboBox(bd);
+        bedcjb = new JComboBox<>(bd);
         bedcjb.setBounds(200, 240, 150, 30);
         bedcjb.setBackground(Color.white);
         add(bedcjb);
@@ -65,7 +65,7 @@ public class Addroom extends JFrame implements ActionListener{
         rmsts.setBounds(70,300,200,20);
         add(rmsts);
         String rm[] = {"AC","Non Ac","Cooler" };
-        rmcjb = new JComboBox(rm);
+        rmcjb = new JComboBox<>(rm);
         rmcjb.setBounds(200, 300, 150, 30);
         rmcjb.setBackground(Color.white);
         add(rmcjb);
@@ -91,7 +91,7 @@ public class Addroom extends JFrame implements ActionListener{
         submit.setForeground(Color.WHITE);
         submit.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
         submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        submit.addActionListener(this);
+        // action listener will be attached after full initialization to avoid 'this' escaping during construction
 
         // Hover effect
         submit.addMouseListener(new MouseAdapter() {
@@ -114,7 +114,7 @@ public class Addroom extends JFrame implements ActionListener{
         cncl.setForeground(Color.WHITE);
         cncl.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
         cncl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cncl.addActionListener(this);
+        // action listener will be attached after full initialization to avoid 'this' escaping during construction
 
         // Hover effect
         cncl.addMouseListener(new MouseAdapter() {
@@ -144,10 +144,16 @@ ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
 
 
         
+        // attach listeners now that the object is fully initialized
+        submit.addActionListener(this);
+        cncl.addActionListener(this);
+
         setLayout(null);
-           setBounds(300, 100, 850, 540);
-           getContentPane().setBackground(Color.white);
-           setVisible(true);
+        setBounds(300, 100, 850, 540);
+        getContentPane().setBackground(Color.white);
+     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setVisible(true);
     }
 
 

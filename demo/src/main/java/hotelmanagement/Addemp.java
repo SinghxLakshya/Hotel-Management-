@@ -14,7 +14,7 @@ public class Addemp extends JFrame implements ActionListener {
     JTextField lname, tage, slryField, phnField, emField;
     JRadioButton rbg, female;
     JButton submit, cncl;
-    JComboBox cjb;
+    JComboBox <String> cjb;
 
     public Addemp() {
 
@@ -64,7 +64,7 @@ public class Addemp extends JFrame implements ActionListener {
 
         String str[] = { "Front Desk clerks", "Porters", "House Keeping", "Receptionist", "Roomservice",
                 "Kitchen staff", "Head-chef" };
-        cjb = new JComboBox(str);
+        cjb = new JComboBox<>(str);
         cjb.setBounds(200, 220, 150, 30);
         cjb.setBackground(Color.white);
         add(cjb);
@@ -149,6 +149,7 @@ public class Addemp extends JFrame implements ActionListener {
         setLayout(null);
         setBounds(300, 100, 850, 540);
         getContentPane().setBackground(Color.white);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
