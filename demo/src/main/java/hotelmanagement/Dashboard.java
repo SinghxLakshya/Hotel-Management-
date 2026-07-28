@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener {
-JMenuItem ademp;
+JMenuItem ademp,adrms;
     public Dashboard() {
 
         setBounds(0, 0, 1550, 1000);
@@ -42,8 +42,9 @@ JMenuItem ademp;
         ademp.addActionListener(this);
         ad.add(ademp);
 
-       JMenuItem adrms=new JMenuItem("Add rooms");
+        adrms=new JMenuItem("Add rooms");
         adrms.setForeground(new Color(0, 123, 255));
+        adrms.addActionListener(this);
         ad.add(adrms);
         
        JMenuItem addrv=new JMenuItem("Add Drives");
@@ -62,6 +63,9 @@ JMenuItem ademp;
         if(ae.getSource() == ademp){
             
             new Addemp();
+        }
+        else if(ae.getSource() == adrms){
+            new Addroom();
         }
     }
 }

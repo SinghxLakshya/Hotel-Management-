@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 public class Addroom extends JFrame implements ActionListener{
+    JTextField tfroom,tfprice;
+    JComboBox avlcjb,stscjb,bedcjb,rmcjb;
+    JButton submit,cncl;
     public Addroom(){
-        JTextField tfroom,tfprice;
-        JComboBox avlcjb,stscjb,bedcjb,rmcjb;
-        JButton submit,cncl;
         
         JLabel heading=new JLabel("Add rooms");
         heading.setFont(new Font("Serif", Font.BOLD, 20));
@@ -132,7 +132,12 @@ public class Addroom extends JFrame implements ActionListener{
         
         
 
-
+ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(450, 450, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
+        image.setBounds(360, 60, 480, 370);
+        add(image);
 
 
 
@@ -144,13 +149,18 @@ public class Addroom extends JFrame implements ActionListener{
            getContentPane().setBackground(Color.white);
            setVisible(true);
     }
+
+
+
     public static void main(String[] args) {
         new Addroom();
         
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == cncl) {
+            setVisible(false);
+            dispose();
+        }
     }
 }
