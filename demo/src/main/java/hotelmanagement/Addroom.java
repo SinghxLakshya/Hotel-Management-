@@ -1,0 +1,156 @@
+package hotelmanagement;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+
+import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+
+public class Addroom extends JFrame implements ActionListener{
+    public Addroom(){
+        JTextField tfroom,tfprice;
+        JComboBox avlcjb,stscjb,bedcjb,rmcjb;
+        JButton submit,cncl;
+        
+        JLabel heading=new JLabel("Add rooms");
+        heading.setFont(new Font("Serif", Font.BOLD, 20));
+        heading.setBounds(390,10,220,30);
+        add(heading);
+        
+        JLabel roomno=new JLabel("Room No.");
+        roomno.setFont(new Font("tahoma", Font.PLAIN, 18));
+        roomno.setBounds(70,60,200,20);
+        add(roomno);
+
+        tfroom =new JTextField();
+        tfroom.setBounds(200,60,150,30);
+        add(tfroom);
+        
+        
+        JLabel avl=new JLabel("Available");
+        avl.setFont(new Font("tahoma", Font.PLAIN, 18));
+        avl.setBounds(70,120,200,20);
+        add(avl);
+        String str[] = {"Available","Occupied" };
+        avlcjb = new JComboBox(str);
+        avlcjb.setBounds(200, 120, 150, 30);
+        avlcjb.setBackground(Color.white);
+        add(avlcjb);
+        
+        // JLabel clean=new JLabel("Clean Status");
+        // clean.setFont(new Font("tahoma", Font.PLAIN, 18));
+        // clean.setBounds(70,180,200,20);
+        // add(clean);
+        // String sts[] = {"Clean","Tidy" };
+        // stscjb = new JComboBox(sts);
+        // stscjb.setBounds(200, 180, 150, 30);
+        // stscjb.setBackground(Color.white);
+        // add(stscjb);
+
+        // JLabel bed=new JLabel("Bed Type");
+        // bed.setFont(new Font("tahoma", Font.PLAIN, 18));
+        // bed.setBounds(70,240,200,20);
+        // add(bed);
+        // String bd[] = {"Single bed","Double bed","two single beds","Dormitory for kids" };
+        // bedcjb = new JComboBox(bd);
+        // bedcjb.setBounds(200, 240, 150, 30);
+        // bedcjb.setBackground(Color.white);
+        // add(bedcjb);
+
+
+        JLabel rmsts=new JLabel("Room Type");
+        rmsts.setFont(new Font("tahoma", Font.PLAIN, 18));
+        rmsts.setBounds(70,300,200,20);
+        add(rmsts);
+        String rm[] = {"AC","Non Ac","Cooler" };
+        rmcjb = new JComboBox(rm);
+        rmcjb.setBounds(200, 300, 150, 30);
+        rmcjb.setBackground(Color.white);
+        add(rmcjb);
+
+
+
+        
+        
+        JLabel price=new JLabel("Price");
+        price.setFont(new Font("tahoma", Font.PLAIN, 18));
+        price.setBounds(70,360,200,20);
+        add(price);
+
+        tfprice =new JTextField();
+        tfprice.setBounds(200,360,150,30);
+        add(tfprice);
+        
+         submit = new JButton("Add rooms");
+        submit.setBounds(200, 450, 150, 30);
+        submit.setFont(new Font("Arial", Font.BOLD, 16));
+        submit.setFocusPainted(false);
+        submit.setBackground(new Color(0, 0, 0, 200));
+        submit.setForeground(Color.WHITE);
+        submit.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        submit.addActionListener(this);
+
+        // Hover effect
+        submit.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                submit.setBackground(new Color(0, 120, 215));
+                submit.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(MouseEvent evt) {
+                submit.setBackground(new Color(0, 0, 0, 200));
+                submit.setForeground(Color.WHITE);
+            }
+        });
+        add(submit);
+        cncl = new JButton("Cancel");
+        cncl.setBounds(400, 450, 150, 30);
+        cncl.setFont(new Font("Arial", Font.BOLD, 16));
+        cncl.setFocusPainted(false);
+        cncl.setBackground(new Color(0, 0, 0, 200));
+        cncl.setForeground(Color.WHITE);
+        cncl.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        cncl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cncl.addActionListener(this);
+
+        // Hover effect
+        cncl.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 120, 215));
+                cncl.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 0, 0, 200));
+                cncl.setForeground(Color.WHITE);
+            }
+        });
+        add(cncl);
+        
+        
+
+
+
+
+
+
+
+        
+        setLayout(null);
+           setBounds(300, 100, 850, 540);
+           getContentPane().setBackground(Color.white);
+           setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Addroom();
+        
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+}
