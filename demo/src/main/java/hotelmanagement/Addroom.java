@@ -39,25 +39,25 @@ public class Addroom extends JFrame implements ActionListener{
         avlcjb.setBackground(Color.white);
         add(avlcjb);
         
-        // JLabel clean=new JLabel("Clean Status");
-        // clean.setFont(new Font("tahoma", Font.PLAIN, 18));
-        // clean.setBounds(70,180,200,20);
-        // add(clean);
-        // String sts[] = {"Clean","Tidy" };
-        // stscjb = new JComboBox(sts);
-        // stscjb.setBounds(200, 180, 150, 30);
-        // stscjb.setBackground(Color.white);
-        // add(stscjb);
+        JLabel clean=new JLabel("Clean Status");
+        clean.setFont(new Font("tahoma", Font.PLAIN, 18));
+        clean.setBounds(70,180,200,20);
+        add(clean);
+        String sts[] = {"Clean","Tidy" };
+        stscjb = new JComboBox(sts);
+        stscjb.setBounds(200, 180, 150, 30);
+        stscjb.setBackground(Color.white);
+        add(stscjb);
 
-        // JLabel bed=new JLabel("Bed Type");
-        // bed.setFont(new Font("tahoma", Font.PLAIN, 18));
-        // bed.setBounds(70,240,200,20);
-        // add(bed);
-        // String bd[] = {"Single bed","Double bed","two single beds","Dormitory for kids" };
-        // bedcjb = new JComboBox(bd);
-        // bedcjb.setBounds(200, 240, 150, 30);
-        // bedcjb.setBackground(Color.white);
-        // add(bedcjb);
+        JLabel bed=new JLabel("Bed Type");
+        bed.setFont(new Font("tahoma", Font.PLAIN, 18));
+        bed.setBounds(70,240,200,20);
+        add(bed);
+        String bd[] = {"Single bed","Double bed","two single beds","Dormitory for kids" };
+        bedcjb = new JComboBox(bd);
+        bedcjb.setBounds(200, 240, 150, 30);
+        bedcjb.setBackground(Color.white);
+        add(bedcjb);
 
 
         JLabel rmsts=new JLabel("Room Type");
