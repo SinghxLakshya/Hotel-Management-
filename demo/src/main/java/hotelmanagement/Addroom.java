@@ -1,6 +1,7 @@
 package hotelmanagement;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
 
 import javax.swing.*;
 
@@ -26,6 +27,8 @@ public class Addroom extends JFrame implements ActionListener{
 
         tfroom =new JTextField();
         tfroom.setBounds(200,60,150,30);
+
+ 
         add(tfroom);
         
         
@@ -81,6 +84,7 @@ public class Addroom extends JFrame implements ActionListener{
 
         tfprice =new JTextField();
         tfprice.setBounds(200,360,150,30);
+   
         add(tfprice);
         
          submit = new JButton("Add rooms");
@@ -129,6 +133,12 @@ public class Addroom extends JFrame implements ActionListener{
             }
         });
         add(cncl);
+
+
+
+   
+
+
         
         
 
@@ -164,9 +174,48 @@ ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == cncl) {
-            setVisible(false);
+        if (ae.getSource() == submit) {
+            String room = tfroom.getText().trim();
+            String price = tfprice.getText().trim();
+            String avlString = (String) avlcjb.getSelectedItem();
+            String stsString = (String) stscjb.getSelectedItem();
+            String bedString = (String) bedcjb.getSelectedItem();
+            String rmString = (String) rmcjb.getSelectedItem();
+
+            // Corrected input validation check
+            if (room.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Room number cannot be empty.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (price.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Price cannot be empty.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+           try {
+               Conn conn = new Conn();
+               String query = "INSERT INTO addrooms VALUES(?,?,?,?,?,?)";
+               PreparedStatement ps = conn.c.prepareStatement(query);
+               ps.setString(1, room);
+               ps.setString(2, avlString);
+               ps.setString(3, stsString);
+               ps.setString(4, bedString);
+               ps.setString(5, rmString);
+               ps.setString(6, price);
+               ps.executeUpdate();
+           
+               JOptionPane.showMessageDialog(this, "Room data added successfully.");
+               setVisible(false);
+               dispose();
+           } catch (Exception e) {
+               e.printStackTrace();
+               JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+           } 
+        }
+        else if (ae.getSource()== cncl) {
+             setVisible(false);
             dispose();
+            
         }
     }
 }
