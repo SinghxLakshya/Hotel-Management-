@@ -28,7 +28,15 @@ public class Addroom extends JFrame implements ActionListener{
         tfroom =new JTextField();
         tfroom.setBounds(200,60,150,30);
 
- 
+             // Restrict tfroom to numbers only
+tfroom.addKeyListener(new java.awt.event.KeyAdapter() {
+    public void keyTyped(java.awt.event.KeyEvent e) {
+        char c = e.getKeyChar();
+        if (!Character.isDigit(c)) {
+            e.consume(); // Ignore non-digit keypresses
+        }
+    }
+});
         add(tfroom);
         
         
@@ -84,7 +92,15 @@ public class Addroom extends JFrame implements ActionListener{
 
         tfprice =new JTextField();
         tfprice.setBounds(200,360,150,30);
-   
+        // Restrict tfprice to numbers only
+tfprice.addKeyListener(new java.awt.event.KeyAdapter() {
+    public void keyTyped(java.awt.event.KeyEvent e) {
+        char c = e.getKeyChar();
+        if (!Character.isDigit(c)) {
+            e.consume(); // Ignore non-digit keypresses
+        }
+    }
+});
         add(tfprice);
         
          submit = new JButton("Add rooms");
