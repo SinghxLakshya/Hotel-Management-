@@ -2,317 +2,79 @@ package hotelmanagement;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.PreparedStatement;
 
 public class Reception extends JFrame {
     JButton submit, room, department, employee, customerin, managerin, chekout, update, updaterm, pickup, search,
             logout;
 
     public Reception() {
-        submit = new JButton("New Customer forum");
-        submit.setBounds(10, 30, 200, 30);
-        submit.setFont(new Font("tahoma", Font.PLAIN, 16));
-        submit.setFocusPainted(false);
-        submit.setBackground(new Color(0, 0, 0, 200));
-        submit.setForeground(Color.WHITE);
-        submit.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
+        // Initialize all buttons with their corresponding labels and vertical Y offsets
+        submit     = createStyledButton("New Customer Form", 30);
+        room       = createStyledButton("Rooms", 70);
+        department = createStyledButton("Department", 110);
+        employee   = createStyledButton("Employee", 150);
+        customerin = createStyledButton("Customer Info", 190);
+        managerin  = createStyledButton("Manager Info", 230);
+        chekout    = createStyledButton("Check Out", 270);
+        update     = createStyledButton("Update Status", 310);
+        updaterm   = createStyledButton("Update Room Status", 350);
+        pickup     = createStyledButton("Pick up Service", 390);
+        search     = createStyledButton("Search Room", 430);
+        logout     = createStyledButton("Logout", 470);
 
-        // Hover effect
-        submit.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                submit.setBackground(new Color(0, 120, 215));
-                submit.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                submit.setBackground(new Color(0, 0, 0, 200));
-                submit.setForeground(Color.WHITE);
-            }
-        });
+        // Add buttons to frame
         add(submit);
-
-        room = new JButton("Rooms");
-        room.setBounds(10, 70, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
         add(room);
-
-        department = new JButton("Department");
-        department.setBounds(10, 110, 200, 30);
-        department.setFont(new Font("tahoma", Font.PLAIN, 16));
-        department.setFocusPainted(false);
-        department.setBackground(new Color(0, 0, 0, 200));
-        department.setForeground(Color.WHITE);
-        department.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        department.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        department.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                department.setBackground(new Color(0, 120, 215));
-                department.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                department.setBackground(new Color(0, 0, 0, 200));
-                department.setForeground(Color.WHITE);
-            }
-        });
         add(department);
-
-        employee = new JButton("Employee");
-        employee.setBounds(10, 150, 200, 30);
-        employee.setFont(new Font("tahoma", Font.PLAIN, 16));
-        employee.setFocusPainted(false);
-        employee.setBackground(new Color(0, 0, 0, 200));
-        employee.setForeground(Color.WHITE);
-        employee.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        employee.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        employee.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                employee.setBackground(new Color(0, 120, 215));
-                employee.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                employee.setBackground(new Color(0, 0, 0, 200));
-                employee.setForeground(Color.WHITE);
-            }
-        });
         add(employee);
-
-        customerin = new JButton("Customer info");
-        customerin.setBounds(10, 190, 200, 30);
-        customerin.setFont(new Font("tahoma", Font.PLAIN, 16));
-        customerin.setFocusPainted(false);
-        customerin.setBackground(new Color(0, 0, 0, 200));
-        customerin.setForeground(Color.WHITE);
-        customerin.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        customerin.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        customerin.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                customerin.setBackground(new Color(0, 120, 215));
-                customerin.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                customerin.setBackground(new Color(0, 0, 0, 200));
-                customerin.setForeground(Color.WHITE);
-            }
-        });
         add(customerin);
-
-        room = new JButton("Rooms");
-        room.setBounds(10, 230, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 270, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 310, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 350, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 390, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 430, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
-        room = new JButton("Rooms");
-        room.setBounds(10, 470, 200, 30);
-        room.setFont(new Font("tahoma", Font.PLAIN, 16));
-        room.setFocusPainted(false);
-        room.setBackground(new Color(0, 0, 0, 200));
-        room.setForeground(Color.WHITE);
-        room.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
-        room.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // action listener will be attached after full initialization to avoid 'this'
-        // escaping during construction
-
-        // Hover effect
-        room.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                room.setBackground(new Color(0, 120, 215));
-                room.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                room.setBackground(new Color(0, 0, 0, 200));
-                room.setForeground(Color.WHITE);
-            }
-        });
-        add(room);
+        add(managerin);
+        add(chekout);
+        add(update);
+        add(updaterm);
+        add(pickup);
+        add(search);
+        add(logout);
 
         setLayout(null);
         setBounds(300, 100, 850, 560);
-        getContentPane().setBackground(Color.white);
+        getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setVisible(true);
+    }
+
+    /**
+     * Helper method to construct styled JButtons with hover effects to reduce redundant code.
+     */
+    private JButton createStyledButton(String text, int yPosition) {
+        JButton button = new JButton(text);
+        button.setBounds(10, yPosition, 200, 30);
+        button.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        button.setFocusPainted(false);
+        button.setBackground(new Color(0, 0, 0, 200));
+        button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Hover effect
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                button.setBackground(new Color(0, 120, 215));
+                button.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                button.setBackground(new Color(0, 0, 0, 200));
+                button.setForeground(Color.WHITE);
+            }
+        });
+
+        return button;
     }
 
     public static void main(String[] args) {
