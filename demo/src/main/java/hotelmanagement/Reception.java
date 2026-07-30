@@ -38,6 +38,15 @@ public class Reception extends JFrame {
         add(search);
         add(logout);
 
+
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/fourth.jpg"));
+        // Image i2 = i1.getImage().getScaledInstance(500, 580, Image.SCALE_DEFAULT);
+        // ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i1);
+        image.setBounds(250, 30, 550, 470);
+        add(image);
+
         setLayout(null);
         setBounds(300, 100, 850, 560);
         getContentPane().setBackground(Color.WHITE);
