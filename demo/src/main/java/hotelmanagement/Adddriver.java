@@ -8,10 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 
-public class Adddriver extends JFrame implements ActionListener{
-    
-JTextField tfroom, tfprice;
-    JComboBox<String> avlcjb, stscjb, bedcjb, rmcjb;
+public class Adddriver extends JFrame implements ActionListener {
+
+    JTextField tfroom, tfprice, crmField, vehiclenoField;
+    JComboBox<String> avlcjb, stscjb;
     JButton submit, cncl;
 
     public Adddriver() {
@@ -33,72 +33,88 @@ JTextField tfroom, tfprice;
         tfroom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isAlphabetic(c)) {
+                if (!Character.isWhitespace(c) && !Character.isAlphabetic(c)
+                 && c != java.awt.event.KeyEvent.VK_BACK_SPACE
+                && c != java.awt.event.KeyEvent.VK_DELETE) {
+                    
                     e.consume(); // Ignore digit keypresses
                 }
             }
         });
         add(tfroom);
 
-        JLabel avl = new JLabel("Available");
-        avl.setFont(new Font("tahoma", Font.PLAIN, 18));
-        avl.setBounds(70, 120, 200, 20);
-        add(avl);
-        String str[] = { "Available", "Occupied" };
-        avlcjb = new JComboBox<>(str);
-        avlcjb.setBounds(200, 120, 150, 30);
-        avlcjb.setBackground(Color.white);
-        add(avlcjb);
-
-        JLabel clean = new JLabel("Clean Status");
-        clean.setFont(new Font("tahoma", Font.PLAIN, 18));
-        clean.setBounds(70, 180, 200, 20);
-        add(clean);
-        String sts[] = { "Clean", "Tidy" };
-        stscjb = new JComboBox<>(sts);
-        stscjb.setBounds(200, 180, 150, 30);
-        stscjb.setBackground(Color.white);
-        add(stscjb);
-
-        JLabel bed = new JLabel("Bed Type");
-        bed.setFont(new Font("tahoma", Font.PLAIN, 18));
-        bed.setBounds(70, 240, 200, 20);
-        add(bed);
-        String bd[] = { "Single bed", "Double bed", "two single beds", "Dormitory for kids" };
-        bedcjb = new JComboBox<>(bd);
-        bedcjb.setBounds(200, 240, 150, 30);
-        bedcjb.setBackground(Color.white);
-        add(bedcjb);
-
-        JLabel rmsts = new JLabel("Room Type");
-        rmsts.setFont(new Font("tahoma", Font.PLAIN, 18));
-        rmsts.setBounds(70, 300, 200, 20);
-        add(rmsts);
-        String rm[] = { "AC", "Non Ac", "Cooler" };
-        rmcjb = new JComboBox<>(rm);
-        rmcjb.setBounds(200, 300, 150, 30);
-        rmcjb.setBackground(Color.white);
-        add(rmcjb);
-
-        JLabel price = new JLabel("Price");
+        JLabel price = new JLabel("Age");
         price.setFont(new Font("tahoma", Font.PLAIN, 18));
-        price.setBounds(70, 360, 200, 20);
+        price.setBounds(70, 120, 200, 20);
         add(price);
 
         tfprice = new JTextField();
-        tfprice.setBounds(200, 360, 150, 30);
+        tfprice.setBounds(200, 120, 150, 30);
         // Restrict tfprice to numbers only
         tfprice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isDigit(c)) {
+                if (!Character.isDigit(c)
+                 && c != java.awt.event.KeyEvent.VK_BACK_SPACE
+                && c != java.awt.event.KeyEvent.VK_DELETE) {
                     e.consume(); // Ignore non-digit keypresses
                 }
             }
         });
         add(tfprice);
 
-        submit = new JButton("Add rooms");
+        JLabel clean = new JLabel("Gender");
+        clean.setFont(new Font("tahoma", Font.PLAIN, 18));
+        clean.setBounds(70, 180, 200, 20);
+        add(clean);
+        String sts[] = { "Male", "Female" };
+        stscjb = new JComboBox<>(sts);
+        stscjb.setBounds(200, 180, 150, 30);
+        stscjb.setBackground(Color.white);
+        add(stscjb);
+
+        JLabel bed = new JLabel("Vehicle NO.");
+        bed.setFont(new Font("tahoma", Font.PLAIN, 18));
+        bed.setBounds(70, 240, 200, 20);
+        add(bed);
+        vehiclenoField = new JTextField();
+        vehiclenoField.setBounds(200, 240, 150, 30);
+        vehiclenoField.setBackground(Color.white);
+        add(vehiclenoField);
+
+        // String bd[] = { "Ford", "Hyundai", "Mahindra", "Mitsubishi", "Maruti",
+        // "Renault", "Tata", "Toyota" };
+        // bedcjb = new JComboBox<>(bd);
+        // bedcjb.setBounds(200, 240, 150, 30);
+        // bedcjb.setBackground(Color.white);
+        // add(bedcjb);
+
+        JLabel rmsts = new JLabel("Car Model");
+        rmsts.setFont(new Font("tahoma", Font.PLAIN, 18));
+        rmsts.setBounds(70, 300, 200, 20);
+        add(rmsts);
+        crmField = new JTextField();
+        crmField.setBounds(200, 300, 150, 30);
+        crmField.setBackground(Color.white);
+        add(crmField);
+
+        // String rm[] = { "AC", "Non Ac", "Cooler" };
+        // rmcjb = new JComboBox<>(rm);
+        // rmcjb.setBounds(200, 300, 150, 30);
+        // rmcjb.setBackground(Color.white);
+        // add(rmcjb);
+
+        JLabel avl = new JLabel("Availablity");
+        avl.setFont(new Font("tahoma", Font.PLAIN, 18));
+        avl.setBounds(70, 360, 200, 20);
+        add(avl);
+        String str[] = { "Available", "Not available" };
+        avlcjb = new JComboBox<>(str);
+        avlcjb.setBounds(200, 360, 150, 30);
+        avlcjb.setBackground(Color.white);
+        add(avlcjb);
+
+        submit = new JButton("Add Driver");
         submit.setBounds(200, 450, 150, 30);
         submit.setFont(new Font("Arial", Font.BOLD, 16));
         submit.setFocusPainted(false);
@@ -147,7 +163,7 @@ JTextField tfroom, tfprice;
         });
         add(cncl);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/eleven.jpg"));
         Image i2 = i1.getImage().getScaledInstance(450, 450, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -176,36 +192,46 @@ JTextField tfroom, tfprice;
         if (ae.getSource() == submit) {
             String room = tfroom.getText().trim();
             String price = tfprice.getText().trim();
+            String rmString = crmField.getText().trim();
+            String bedString = vehiclenoField.getText().trim();
             String avlString = (String) avlcjb.getSelectedItem();
             String stsString = (String) stscjb.getSelectedItem();
-            String bedString = (String) bedcjb.getSelectedItem();
-            String rmString = (String) rmcjb.getSelectedItem();
 
             // Corrected input validation check
             if (room.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Room number cannot be empty.", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Driver Name cannot be empty.", "Validation Error",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (price.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Price cannot be empty.", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Age cannot be empty.", "Validation Error",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (bedString.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vehicle number cannot be empty.", "Validation Error",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (rmString.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Car Model number cannot be empty.", "Validation Error",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             try {
                 Conn conn = new Conn();
-                String query = "INSERT INTO addrooms VALUES(?,?,?,?,?,?)";
+                String query = "INSERT INTO Drivers VALUES(?,?,?,?,?,?)";
                 PreparedStatement ps = conn.c.prepareStatement(query);
                 ps.setString(1, room);
-                ps.setString(2, avlString);
+                ps.setString(2, price);
                 ps.setString(3, stsString);
                 ps.setString(4, bedString);
                 ps.setString(5, rmString);
-                ps.setString(6, price);
+                ps.setString(6, avlString);
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(this, "Room data added successfully.");
+                JOptionPane.showMessageDialog(this, "Drivers data added successfully.");
                 setVisible(false);
                 dispose();
             } catch (Exception e) {
