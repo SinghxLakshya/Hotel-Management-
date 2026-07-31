@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener {
-JMenuItem ademp,adrms;
+JMenuItem ademp,adrms,addrv;
     public Dashboard() {
 
         setBounds(0, 0, 1550, 1000);
@@ -47,8 +47,9 @@ JMenuItem ademp,adrms;
         adrms.addActionListener(this);
         ad.add(adrms);
         
-       JMenuItem addrv=new JMenuItem("Add Drives");
+       addrv=new JMenuItem("Add Drives");
         addrv.setForeground(new Color(0, 123, 255));
+        addrv.addActionListener(this);
         ad.add(addrv);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -65,8 +66,11 @@ JMenuItem ademp,adrms;
             
             new Addemp();
         }
-        else if(ae.getSource() == adrms){
+         if(ae.getSource() == adrms){
             new Addroom();
+        }
+         if(ae.getSource() == addrv){
+            new Adddriver();
         }
     }
 }
