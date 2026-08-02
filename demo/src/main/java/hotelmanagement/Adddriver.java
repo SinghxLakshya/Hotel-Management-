@@ -29,7 +29,7 @@ public class Adddriver extends JFrame implements ActionListener {
         tfroom = new JTextField();
         tfroom.setBounds(200, 60, 150, 30);
 
-        // Restrict tfroom to numbers only
+        // Restrict tfroom to names only
         tfroom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
@@ -162,6 +162,9 @@ public class Adddriver extends JFrame implements ActionListener {
             }
         });
         add(cncl);
+        // attach listeners now that the object is fully initialized
+        submit.addActionListener(this);
+        cncl.addActionListener(this);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/eleven.jpg"));
         Image i2 = i1.getImage().getScaledInstance(450, 450, Image.SCALE_DEFAULT);
@@ -170,9 +173,6 @@ public class Adddriver extends JFrame implements ActionListener {
         image.setBounds(360, 60, 480, 370);
         add(image);
 
-        // attach listeners now that the object is fully initialized
-        submit.addActionListener(this);
-        cncl.addActionListener(this);
 
         setLayout(null);
         setBounds(300, 100, 850, 540);
