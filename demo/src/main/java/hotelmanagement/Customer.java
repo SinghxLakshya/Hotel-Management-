@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class Customer extends JFrame implements ActionListener {
@@ -64,7 +65,7 @@ public class Customer extends JFrame implements ActionListener {
 
         tfname = new JTextField();
         tfname.setBounds(200, 160, 150, 25);
-       
+
         tfname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
@@ -117,10 +118,23 @@ public class Customer extends JFrame implements ActionListener {
         add(lblroom);
 
         croom = new Choice();
-        croom.add("101");
-        croom.add("102");
-        croom.add("103");
-        croom.add("104");
+        try {
+            Conn conn = new Conn();
+            String query1 = "select *from addrooms where availablity='Available'";
+            ResultSet rs = conn.s.executeQuery(query1);
+            while (rs.next()) {
+                croom.add(rs.getString("roomno"));
+
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+        // croom.add("101");
+        // croom.add("102");
+        // croom.add("103");
+        // croom.add("104");
         croom.setBounds(200, 280, 150, 25);
         add(croom);
 
@@ -214,12 +228,12 @@ public class Customer extends JFrame implements ActionListener {
         cncl.addActionListener(this);
 
         // Image Label
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/fifth.png")); // Ensure fifth.png or fifth.jpg
-                                                                                        // is inside your icons folder
-        Image i2 = i1.getImage().getScaledInstance(300, 400, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/cust.png"));
+
+        Image i2 = i1.getImage().getScaledInstance(350, 450, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(480, 50, 300, 400);
+        image.setBounds(470, 30, 350, 450);
         add(image);
 
         // Frame Settings
@@ -275,7 +289,8 @@ public class Customer extends JFrame implements ActionListener {
             try {
                 Conn conn = new Conn();
                 String query = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?)";
-                String query2="update addrooms set availablity='occupied' where roomno='"+rommno+"'";;
+                String query2 = "update addrooms set availablity='occupied' where roomno='" + rommno + "'";
+                ;
                 PreparedStatement ps = conn.c.prepareStatement(query);
                 PreparedStatement qs = conn.c.prepareStatement(query2);
                 ps.setString(1, id);
