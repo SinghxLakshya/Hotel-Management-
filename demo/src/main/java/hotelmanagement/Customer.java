@@ -41,14 +41,14 @@ public class Customer extends JFrame implements ActionListener {
 
         tfnumber = new JTextField();
         tfnumber.setBounds(200, 120, 150, 25);
-          // Restrict tfroom to numbers only
+        // Restrict tfroom to numbers only
         tfnumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!Character.isDigit(c)
-                 && c != java.awt.event.KeyEvent.VK_BACK_SPACE
-                && c != java.awt.event.KeyEvent.VK_DELETE) {
-                    
+                        && c != java.awt.event.KeyEvent.VK_BACK_SPACE
+                        && c != java.awt.event.KeyEvent.VK_DELETE) {
+
                     e.consume(); // Ignore digit keypresses
                 }
             }
@@ -63,14 +63,14 @@ public class Customer extends JFrame implements ActionListener {
 
         tfname = new JTextField();
         tfname.setBounds(200, 160, 150, 25);
-          // Restrict tfroom to numbers only
+        // Restrict tfroom to numbers only
         tfname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!Character.isWhitespace(c) && !Character.isAlphabetic(c)
-                 && c != java.awt.event.KeyEvent.VK_BACK_SPACE
-                && c != java.awt.event.KeyEvent.VK_DELETE) {
-                    
+                        && c != java.awt.event.KeyEvent.VK_BACK_SPACE
+                        && c != java.awt.event.KeyEvent.VK_DELETE) {
+
                     e.consume(); // Ignore digit keypresses
                 }
             }
@@ -149,7 +149,7 @@ public class Customer extends JFrame implements ActionListener {
         add(tfdeposit);
 
         // Buttons
-        submit = new JButton("Add Driver");
+        submit = new JButton("Add Customer");
         submit.setBounds(200, 450, 150, 30);
         submit.setFont(new Font("Arial", Font.BOLD, 16));
         submit.setFocusPainted(false);
@@ -229,7 +229,8 @@ public class Customer extends JFrame implements ActionListener {
 
             // Validation Checks
             if (number.equals("")) {
-                JOptionPane.showMessageDialog(null, "ID Number field cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ID Number field cannot be empty!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (name.equals("")) {
@@ -241,14 +242,15 @@ public class Customer extends JFrame implements ActionListener {
                 return;
             }
             if (country.equals("")) {
-                JOptionPane.showMessageDialog(null, "Country field cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Country field cannot be empty!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (deposit.equals("")) {
-                JOptionPane.showMessageDialog(null, "Deposit field cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Deposit field cannot be empty!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
 
             JOptionPane.showMessageDialog(null, "New Customer Added Successfully");
             setVisible(false);
@@ -256,7 +258,7 @@ public class Customer extends JFrame implements ActionListener {
             setVisible(false);
             dispose();
 
-            // new Reception(); // Open previous screen
+            new Reception(); // Open previous screen
         }
     }
 
