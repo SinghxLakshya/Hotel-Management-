@@ -2,10 +2,12 @@ package hotelmanagement;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Reception extends JFrame {
+public class Reception extends JFrame implements ActionListener {
     JButton submit, room, department, employee, customerin, managerin, chekout, update, updaterm, pickup, search,
             logout;
 
@@ -25,6 +27,7 @@ public class Reception extends JFrame {
         logout     = createStyledButton("Logout", 470);
 
         // Add buttons to frame
+        submit.addActionListener(this);
         add(submit);
         add(room);
         add(department);
@@ -88,5 +91,12 @@ public class Reception extends JFrame {
 
     public static void main(String[] args) {
         new Reception();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource()==submit) {
+            new Customer();
+        }
     }
 }
