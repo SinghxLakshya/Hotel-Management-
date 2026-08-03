@@ -207,8 +207,8 @@ public class Addroom extends JFrame implements ActionListener {
                 ps.executeUpdate();
 
                 JOptionPane.showMessageDialog(this, "Room data added successfully.");
-                setVisible(false);
-                dispose();
+                setVisible(true);
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage(), "Error",
@@ -217,6 +217,7 @@ public class Addroom extends JFrame implements ActionListener {
         } else if (ae.getSource() == cncl) {
             setVisible(false);
             dispose();
+            
 
         }
     }
