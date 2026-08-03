@@ -3,6 +3,7 @@ package hotelmanagement;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
 import java.util.Date;
 
 public class Customer extends JFrame implements ActionListener {
@@ -63,7 +64,7 @@ public class Customer extends JFrame implements ActionListener {
 
         tfname = new JTextField();
         tfname.setBounds(200, 160, 150, 25);
-        // Restrict tfroom to numbers only
+       
         tfname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
@@ -146,6 +147,17 @@ public class Customer extends JFrame implements ActionListener {
 
         tfdeposit = new JTextField();
         tfdeposit.setBounds(200, 360, 150, 25);
+        tfdeposit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)
+                        && c != java.awt.event.KeyEvent.VK_BACK_SPACE
+                        && c != java.awt.event.KeyEvent.VK_DELETE) {
+
+                    e.consume(); // Ignore digit keypresses
+                }
+            }
+        });
         add(tfdeposit);
 
         // Buttons
@@ -207,7 +219,7 @@ public class Customer extends JFrame implements ActionListener {
         Image i2 = i1.getImage().getScaledInstance(300, 400, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(400, 50, 300, 400);
+        image.setBounds(480, 50, 300, 400);
         add(image);
 
         // Frame Settings
@@ -226,6 +238,15 @@ public class Customer extends JFrame implements ActionListener {
             String name = tfname.getText().trim();
             String country = tfcountry.getText().trim();
             String deposit = tfdeposit.getText().trim();
+            String id = (String) idCombo.getSelectedItem();
+            String gnd = null;
+            if (rbmale.isSelected()) {
+                gnd = "Male";
+            } else if (rbfemale.isSelected()) {
+                gnd = "Female";
+            }
+            String rommno = (String) croom.getSelectedItem();
+            String time = tfcheckintime.getText();
 
             // Validation Checks
             if (number.equals("")) {
@@ -250,6 +271,35 @@ public class Customer extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Deposit field cannot be empty!", "Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            try {
+                Conn conn = new Conn();
+                String query = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?)";
+                String query2="update addrooms set availablity='occupied' where roomno='"+rommno+"'";;
+                PreparedStatement ps = conn.c.prepareStatement(query);
+                PreparedStatement qs = conn.c.prepareStatement(query2);
+                ps.setString(1, id);
+                ps.setString(2, number);
+                ps.setString(3, name);
+                ps.setString(4, gnd);
+                ps.setString(5, country);
+                ps.setString(6, rommno);
+                ps.setString(7, time);
+                ps.setString(8, deposit);
+                ps.executeUpdate();
+                qs.executeUpdate();
+
+                // conn.s.executeUpdate(query2);
+                JOptionPane.showMessageDialog(this, "Customer data added successfully.");
+                setVisible(false);
+                dispose();
+                new Reception();
+
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
 
             JOptionPane.showMessageDialog(null, "New Customer Added Successfully");
