@@ -29,6 +29,7 @@ public class Reception extends JFrame implements ActionListener {
         // Add buttons to frame
         submit.addActionListener(this);
         add(submit);
+        room.addActionListener(this);
         add(room);
         add(department);
         add(employee);
@@ -96,7 +97,13 @@ public class Reception extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==submit) {
+            setVisible(false);
             new Customer();
+        }
+        if (ae.getSource()==room) {
+                        setVisible(false);
+
+            new Allrooms();
         }
     }
 }

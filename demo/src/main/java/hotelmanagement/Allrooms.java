@@ -6,11 +6,12 @@ import java.awt.event.*;
 import java.sql.ResultSet;
 import net.proteanit.sql.*;
 
-public class Allrooms extends JFrame {
-JTable t1;
+public class Allrooms extends JFrame implements ActionListener {
+    JTable t1;
+    JButton cncl;
 
     public Allrooms() {
-        
+
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,8 +28,38 @@ JTable t1;
 
         // 2. Put table inside JScrollPane (This makes table headers visible)
         JScrollPane jsp = new JScrollPane(t1);
-        jsp.setBounds(0, 14, 505, 600); // Set bounds on ScrollPane, not table
+        jsp.setBounds(0, 14, 505, 485); // Set bounds on ScrollPane, not table
+
+        jsp.setBorder(BorderFactory.createEmptyBorder()); // Removes the scrollpane border
+        jsp.getViewport().setBackground(Color.WHITE); // Turns the empty space inside white
+        jsp.setBackground(Color.WHITE);
         add(jsp);
+
+        cncl = new JButton("Cancel");
+        cncl.setBounds(150, 500, 150, 30);
+        cncl.setFont(new Font("Arial", Font.BOLD, 16));
+        cncl.setFocusPainted(false);
+        cncl.setBackground(new Color(0, 0, 0, 200));
+        cncl.setForeground(Color.WHITE);
+        cncl.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        cncl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // action listener will be attached after full initialization to avoid 'this'
+        // escaping during construction
+
+        // Hover effect
+        cncl.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 120, 215));
+                cncl.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 0, 0, 200));
+                cncl.setForeground(Color.WHITE);
+            }
+        });
+        add(cncl);
+        cncl.addActionListener(this);
 
         try {
             Conn con = new Conn();
@@ -44,5 +75,13 @@ JTable t1;
 
     public static void main(String[] args) {
         new Allrooms();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+       if (ae.getSource()==cncl) {
+        setVisible(false);
+        new Reception();
+       }
     }
 }
