@@ -62,7 +62,7 @@ public class Addemp extends JFrame implements ActionListener {
         job.setFont(new Font("Tahoma", Font.PLAIN, 17));
         add(job);
 
-        String str[] = { "Front Desk clerks", "Porters", "House Keeping", "Receptionist", "Roomservice",
+        String str[] = { "Manager","Front Desk clerks", "Porters", "House Keeping", "Receptionist", "Roomservice",
                 "Kitchen staff", "Head-chef" };
         cjb = new JComboBox<>(str);
         cjb.setBounds(200, 220, 150, 30);
