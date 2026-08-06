@@ -35,7 +35,9 @@ public class Reception extends JFrame implements ActionListener {
         add(department);
         employee.addActionListener(this);
         add(employee);
+        customerin.addActionListener(this);
         add(customerin);
+        managerin.addActionListener(this);
         add(managerin);
         add(chekout);
         add(update);
@@ -116,6 +118,16 @@ public class Reception extends JFrame implements ActionListener {
                         setVisible(false);
 
             new Allemp();
+        }
+        if (ae.getSource()==customerin) {
+                        setVisible(false);
+
+            new Customerinfo();
+        }
+        if (ae.getSource()==managerin) {
+                        setVisible(false);
+
+            new Manager();
         }
     }
 }
