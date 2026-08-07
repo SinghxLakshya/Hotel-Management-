@@ -129,13 +129,14 @@ public class Reception extends JFrame implements ActionListener {
             
         } else if (ae.getSource() == pickup) {
             setVisible(false);
+            new Pickup();
             
         } else if (ae.getSource() == search) {
             setVisible(false);
             new Search();
         } else if (ae.getSource() == logout) {
             setVisible(false);
-            System.exit(0);
+            new Login();
         }
     }
 }
