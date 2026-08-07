@@ -8,36 +8,43 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Reception extends JFrame implements ActionListener {
-    JButton submit, room, department, employee, customerin, managerin, chekout, update, updaterm, pickup, search,
-            logout;
+    JButton submit, room, department, employee, customerin, managerin, chekout, update, updaterm, pickup, search, logout;
 
     public Reception() {
         // Initialize all buttons with their corresponding labels and vertical Y offsets
-        submit     = createStyledButton("New Customer Form", 30);
-        room       = createStyledButton("Rooms", 70);
+        submit = createStyledButton("New Customer Form", 30);
+        room = createStyledButton("Rooms", 70);
         department = createStyledButton("Department", 110);
-        employee   = createStyledButton("Employee", 150);
+        employee = createStyledButton("Employee", 150);
         customerin = createStyledButton("Customer Info", 190);
-        managerin  = createStyledButton("Manager Info", 230);
-        chekout    = createStyledButton("Check Out", 270);
-        update     = createStyledButton("Update Status", 310);
-        updaterm   = createStyledButton("Update Room Status", 350);
-        pickup     = createStyledButton("Pick up Service", 390);
-        search     = createStyledButton("Search Room", 430);
-        logout     = createStyledButton("Logout", 470);
+        managerin = createStyledButton("Manager Info", 230);
+        chekout = createStyledButton("Check Out", 270);
+        update = createStyledButton("Update Status", 310);
+        updaterm = createStyledButton("Update Room Status", 350);
+        pickup = createStyledButton("Pick up Service", 390);
+        search = createStyledButton("Search Room", 430);
+        logout = createStyledButton("Logout", 470);
+
+        // Add action listeners to ALL buttons
+        submit.addActionListener(this);
+        room.addActionListener(this);
+        department.addActionListener(this);
+        employee.addActionListener(this);
+        customerin.addActionListener(this);
+        managerin.addActionListener(this);
+        chekout.addActionListener(this);
+        update.addActionListener(this);
+        updaterm.addActionListener(this);
+        pickup.addActionListener(this);
+        search.addActionListener(this);
+        logout.addActionListener(this);
 
         // Add buttons to frame
-        submit.addActionListener(this);
         add(submit);
-        room.addActionListener(this);
         add(room);
-        department.addActionListener(this);
         add(department);
-        employee.addActionListener(this);
         add(employee);
-        customerin.addActionListener(this);
         add(customerin);
-        managerin.addActionListener(this);
         add(managerin);
         add(chekout);
         add(update);
@@ -46,11 +53,7 @@ public class Reception extends JFrame implements ActionListener {
         add(search);
         add(logout);
 
-
-
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/fourth.jpg"));
-        // Image i2 = i1.getImage().getScaledInstance(500, 580, Image.SCALE_DEFAULT);
-        // ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i1);
         image.setBounds(250, 30, 550, 470);
         add(image);
@@ -63,9 +66,6 @@ public class Reception extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    /**
-     * Helper method to construct styled JButtons with hover effects to reduce redundant code.
-     */
     private JButton createStyledButton(String text, int yPosition) {
         JButton button = new JButton(text);
         button.setBounds(10, yPosition, 200, 30);
@@ -100,34 +100,42 @@ public class Reception extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource()==submit) {
+        if (ae.getSource() == submit) {
             setVisible(false);
             new Customer();
-        }
-        if (ae.getSource()==room) {
-                        setVisible(false);
-
+        } else if (ae.getSource() == room) {
+            setVisible(false);
             new Allrooms();
-        }
-        if (ae.getSource()==department) {
-                        setVisible(false);
-
+        } else if (ae.getSource() == department) {
+            setVisible(false);
             new Dept();
-        }
-        if (ae.getSource()==employee) {
-                        setVisible(false);
-
+        } else if (ae.getSource() == employee) {
+            setVisible(false);
             new Allemp();
-        }
-        if (ae.getSource()==customerin) {
-                        setVisible(false);
-
+        } else if (ae.getSource() == customerin) {
+            setVisible(false);
             new Customerinfo();
-        }
-        if (ae.getSource()==managerin) {
-                        setVisible(false);
-
+        } else if (ae.getSource() == managerin) {
+            setVisible(false);
             new Manager();
+        } else if (ae.getSource() == chekout) {
+            setVisible(false);
+            
+        } else if (ae.getSource() == update) {
+            setVisible(false);
+            
+        } else if (ae.getSource() == updaterm) {
+            setVisible(false);
+            
+        } else if (ae.getSource() == pickup) {
+            setVisible(false);
+            
+        } else if (ae.getSource() == search) {
+            setVisible(false);
+            new Search();
+        } else if (ae.getSource() == logout) {
+            setVisible(false);
+            System.exit(0);
         }
     }
 }
