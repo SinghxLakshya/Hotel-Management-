@@ -1,0 +1,104 @@
+package hotelmanagement;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.ResultSet;
+import net.proteanit.sql.*;
+
+public class Search extends JFrame implements ActionListener {
+    JTable t1;
+    JButton cncl;
+    JComboBox bedtype;
+    JCheckBox Available;
+
+    public Search() {
+
+        setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel heading = new JLabel("Search Rooms");
+        heading.setFont(new Font("Serif", Font.BOLD, 20));
+        heading.setBounds(470, 0, 220, 30);
+        add(heading);
+
+        JLabel bed =new JLabel("Bedtype");
+        bed.setBounds(79, 30, 100, 25);
+        add(bed);
+        bedtype = new JComboBox<>(new String[] { "Single bed", "Double bed", "two single beds", "Dormitory for kids" });
+        bedtype.setBounds(150, 30, 150, 25);
+        bedtype.setBackground(Color.white);
+        add(bedtype);
+
+        Available=new JCheckBox("Display Available Rooms");
+        Available.setBounds(650, 30, 250, 25);
+        Available.setBackground(Color.white);
+        add(Available);
+
+        // 1. Create the table
+        t1 = new JTable();
+        // 2. Put table inside JScrollPane (This makes table headers visible)
+        JScrollPane jsp = new JScrollPane(t1);
+        jsp.setBounds(0, 65, 1065, 400); // Set bounds on ScrollPane, not table
+
+        jsp.setBorder(BorderFactory.createEmptyBorder()); // Removes the scrollpane border
+        jsp.getViewport().setBackground(Color.WHITE); // Turns the empty space inside white
+        jsp.setBackground(Color.WHITE);
+        add(jsp);
+
+
+
+
+
+        //submit and cancel buttons
+
+        cncl = new JButton("Cancel");
+        cncl.setBounds(450, 500, 150, 30);
+        cncl.setFont(new Font("Arial", Font.BOLD, 16));
+        cncl.setFocusPainted(false);
+        cncl.setBackground(new Color(0, 0, 0, 200));
+        cncl.setForeground(Color.WHITE);
+        cncl.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        cncl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // action listener will be attached after full initialization to avoid 'this'
+        // escaping during construction
+
+        // Hover effect
+        cncl.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 120, 215));
+                cncl.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(MouseEvent evt) {
+                cncl.setBackground(new Color(0, 0, 0, 200));
+                cncl.setForeground(Color.WHITE);
+            }
+        });
+        add(cncl);
+        cncl.addActionListener(this);
+
+        try {
+            Conn con = new Conn();
+            ResultSet rs = con.s.executeQuery("select * from addrooms");
+            t1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        setBounds(150, 80, 1065, 600);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Search();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == cncl) {
+            setVisible(false);
+            new Reception();
+        }
+    }
+}
