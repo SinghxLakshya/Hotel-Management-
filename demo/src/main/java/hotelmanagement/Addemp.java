@@ -34,6 +34,15 @@ public class Addemp extends JFrame implements ActionListener {
         add(age);
         tage = new JTextField();
         tage.setBounds(200, 100, 220, 30);
+        // Restrict tfroom to numbers only
+        tage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Ignore non-digit keypresses
+                }
+            }
+        });
         add(tage);
 
         JLabel gnd = new JLabel("Gender");
@@ -75,6 +84,15 @@ public class Addemp extends JFrame implements ActionListener {
         add(slry);
         slryField = new JTextField();
         slryField.setBounds(200, 280, 220, 30);
+        // Restrict tfroom to numbers only
+        slryField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Ignore non-digit keypresses
+                }
+            }
+        });
         add(slryField);
 
         JLabel phn = new JLabel("Phone");
@@ -83,6 +101,15 @@ public class Addemp extends JFrame implements ActionListener {
         add(phn);
         phnField = new JTextField();
         phnField.setBounds(200, 340, 220, 30);
+        // Restrict tfroom to numbers only
+        phnField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Ignore non-digit keypresses
+                }
+            }
+        });
         add(phnField);
         JLabel eml = new JLabel("Email");
         eml.setBounds(60, 400, 120, 30);
