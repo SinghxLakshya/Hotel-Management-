@@ -83,6 +83,15 @@ public class Updatecheck extends JFrame implements ActionListener {
 
         tfpaid = new JTextField();
         tfpaid.setBounds(150, 240, 150, 25);
+        // Restrict tfroom to numbers only
+        tfpaid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Ignore non-digit keypresses
+                }
+            }
+        });
         add(tfpaid);
 
         // Pending Amount
@@ -93,6 +102,15 @@ public class Updatecheck extends JFrame implements ActionListener {
 
         tfpending = new JTextField();
         tfpending.setBounds(150, 280, 150, 25);
+        // Restrict tfroom to numbers only
+        tfpending.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Ignore non-digit keypresses
+                }
+            }
+        });
         add(tfpending);
 
         // Action Buttons
@@ -187,7 +205,7 @@ public class Updatecheck extends JFrame implements ActionListener {
                     tfpending.setText(String.valueOf(pendingAmount));
                 }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(null, "Invalid number format in price or deposit.");
+                JOptionPane.showMessageDialog(null, "Invalid number format in amount paid or amount pending.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
