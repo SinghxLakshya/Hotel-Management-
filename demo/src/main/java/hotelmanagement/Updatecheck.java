@@ -3,6 +3,7 @@ package hotelmanagement;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Updatecheck extends JFrame implements ActionListener {
@@ -38,7 +39,7 @@ public class Updatecheck extends JFrame implements ActionListener {
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("SELECT * FROM customer");
             while (rs.next()) {
-                ccustomer.add(rs.getString("number")); // Assumes 'number' store the ID value
+                ccustomer.add(rs.getString("number"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,35 +96,21 @@ public class Updatecheck extends JFrame implements ActionListener {
         add(tfpending);
 
         // Action Buttons
-        check = new JButton("Check");
-        check.setBackground(Color.BLACK);
-        check.setForeground(Color.WHITE);
-        check.setBounds(30, 340, 80, 30);
-        check.setFocusPainted(false);
-        check.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        check = createStyledButton("Check", 30);
+        update = createStyledButton("Update", 125);
+        back = createStyledButton("Back", 220);
+
         check.addActionListener(this);
         add(check);
 
-        update = new JButton("Update");
-        update.setBackground(Color.BLACK);
-        update.setForeground(Color.WHITE);
-        update.setBounds(125, 340, 80, 30);
-        update.setFocusPainted(false);
-        update.setCursor(new Cursor(Cursor.HAND_CURSOR));
         update.addActionListener(this);
         add(update);
 
-        back = new JButton("Back");
-        back.setBackground(Color.BLACK);
-        back.setForeground(Color.WHITE);
-        back.setBounds(220, 340, 80, 30);
-        back.setFocusPainted(false);
-        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.addActionListener(this);
         add(back);
 
         // Right side image layout
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/nine.jpg")); // Ensure image path matches your project assets
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/nine.jpg"));
         Image i2 = i1.getImage().getScaledInstance(400, 250, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -134,29 +121,73 @@ public class Updatecheck extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    private JButton createStyledButton(String text, int xPosition) {
+        JButton button = new JButton(text);
+        button.setBounds(xPosition, 340, 85, 30);
+        button.setFont(new Font("Tahoma", Font.BOLD, 12)); // Adjusted font size to fit inside 85px width
+        button.setFocusPainted(false);
+        button.setBackground(new Color(0, 0, 0, 200));
+        button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2, true));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Hover effect
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                button.setBackground(new Color(0, 120, 215));
+                button.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                button.setBackground(new Color(0, 0, 0, 200));
+                button.setForeground(Color.WHITE);
+            }
+        });
+
+        return button;
+    }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == check) {
             String id = ccustomer.getSelectedItem();
-            String query = "SELECT * FROM customer WHERE number = '" + id + "'";
+            if (id == null || id.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No customer selected!");
+                return;
+            }
+
             try {
                 Conn c = new Conn();
-                ResultSet rs = c.s.executeQuery(query);
+                PreparedStatement pstmt = c.c.prepareStatement("SELECT * FROM customer WHERE number = ?");
+                pstmt.setString(1, id);
+                ResultSet rs = pstmt.executeQuery();
+
                 while (rs.next()) {
-                    tfroom.setText(rs.getString("room"));
+                    tfroom.setText(rs.getString("roomno"));
                     tfname.setText(rs.getString("name"));
-                    tfcheckin.setText(rs.getString("checkintime"));
+                    tfcheckin.setText(rs.getString("checkin"));
                     tfpaid.setText(rs.getString("deposit"));
                 }
 
                 // Fetch total room price to calculate pending amount
-                ResultSet rs2 = c.s.executeQuery("SELECT * FROM addrooms WHERE roomnumber = '" + tfroom.getText() + "'");
+                PreparedStatement pstmt2 = c.c.prepareStatement("SELECT * FROM addrooms WHERE roomno = ?");
+                pstmt2.setString(1, tfroom.getText());
+                ResultSet rs2 = pstmt2.executeQuery();
+
                 while (rs2.next()) {
-                    String price = rs2.getString("price");
-                    int amountPaid = Integer.parseInt(tfpaid.getText());
-                    int pendingAmount = Integer.parseInt(price) - amountPaid;
-                    tfpending.setText("" + pendingAmount);
+                    String priceStr = rs2.getString("price");
+                    int price = (priceStr != null && !priceStr.isEmpty()) ? Integer.parseInt(priceStr) : 0;
+                    
+                    String paidStr = tfpaid.getText();
+                    int amountPaid = (paidStr != null && !paidStr.isEmpty()) ? Integer.parseInt(paidStr) : 0;
+                    
+                    int pendingAmount = price - amountPaid;
+                    tfpending.setText(String.valueOf(pendingAmount));
                 }
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Invalid number format in price or deposit.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -169,7 +200,16 @@ public class Updatecheck extends JFrame implements ActionListener {
 
             try {
                 Conn c = new Conn();
-                c.s.executeUpdate("UPDATE customer SET room = '" + room + "', name = '" + name + "', checkintime = '" + checkin + "', deposit = '" + deposit + "' WHERE number = '" + number + "'");
+                PreparedStatement pstmt = c.c.prepareStatement(
+                    "UPDATE customer SET roomno = ?, name = ?, checkin = ?, deposit = ? WHERE number = ?"
+                );
+                pstmt.setString(1, room);
+                pstmt.setString(2, name);
+                pstmt.setString(3, checkin);
+                pstmt.setString(4, deposit);
+                pstmt.setString(5, number);
+
+                pstmt.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Data Updated Successfully");
                 setVisible(false);
                 new Reception();
