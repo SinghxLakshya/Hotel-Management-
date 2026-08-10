@@ -3,11 +3,11 @@ package hotelmanagement;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener {
-JMenuItem ademp,adrms,addrv,recep ;
+    JMenuItem ademp, adrms, addrv, recep;
+
     public Dashboard() {
 
         setBounds(0, 0, 1550, 1000);
@@ -20,7 +20,14 @@ JMenuItem ademp,adrms,addrv,recep ;
         image.setBounds(0, 0, 1366, 1000);
         add(image);
 
-        // menubar is cooded here
+        // Welcome Text on Image
+        JLabel text = new JLabel("THE  CRYSTAL OAK WELCOMES YOU");
+        text.setBounds(300, 80, 800, 50);
+        text.setFont(new Font("serif", Font.PLAIN, 38));
+        text.setForeground(Color.white); // Midnight Blue / Dark Navy
+        image.add(text);
+
+        // Menu bar
         JMenuBar mb = new JMenuBar();
         mb.setBounds(0, 0, 1366, 30);
         image.add(mb);
@@ -32,28 +39,28 @@ JMenuItem ademp,adrms,addrv,recep ;
         ad.setForeground(Color.RED);
         mb.add(ad);
 
-        // Menu itemsare here
-         recep=new JMenuItem("Reception");
+        // Menu items
+        recep = new JMenuItem("Reception");
         recep.setForeground(new Color(0, 123, 255));
         recep.addActionListener(this);
         hotel.add(recep);
 
-       ademp=new JMenuItem("Add employee");
+        ademp = new JMenuItem("Add Employee");
         ademp.setForeground(new Color(0, 123, 255));
         ademp.addActionListener(this);
         ad.add(ademp);
 
-        adrms=new JMenuItem("Add rooms");
+        adrms = new JMenuItem("Add Rooms");
         adrms.setForeground(new Color(0, 123, 255));
         adrms.addActionListener(this);
         ad.add(adrms);
-        
-       addrv=new JMenuItem("Add Drives");
+
+        addrv = new JMenuItem("Add Drivers");
         addrv.setForeground(new Color(0, 123, 255));
         addrv.addActionListener(this);
         ad.add(addrv);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
@@ -63,17 +70,13 @@ JMenuItem ademp,adrms,addrv,recep ;
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == ademp){
-            
+        if (ae.getSource() == ademp) {
             new Addemp();
-        }
-         if(ae.getSource() == adrms){
+        } else if (ae.getSource() == adrms) {
             new Addroom();
-        }
-         if(ae.getSource() == addrv){
+        } else if (ae.getSource() == addrv) {
             new Adddriver();
-        }
-         if(ae.getSource() == recep){
+        } else if (ae.getSource() == recep) {
             new Reception();
         }
     }
