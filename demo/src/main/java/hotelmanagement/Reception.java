@@ -139,8 +139,13 @@ public class Reception extends JFrame implements ActionListener {
             setVisible(false);
             new Search();
         } else if (ae.getSource() == logout) {
-            setVisible(false);
+           dispose();
+           for (Window window : Window.getWindows()) {
+                window.dispose();
+            }
+            // Navigate to Login screen
             new Login();
+           
         }
     }
 }
