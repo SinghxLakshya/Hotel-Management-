@@ -14,7 +14,6 @@ public class Allemp extends JFrame implements ActionListener {
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setDefaultCloseOperation(Allemp.EXIT_ON_CLOSE);
 
         // ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/eight.jpg"));
         // Image i2 = i1.getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT);
