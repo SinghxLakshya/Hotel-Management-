@@ -17,7 +17,6 @@ public class Pickup extends JFrame implements ActionListener {
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel heading = new JLabel("Search Drivers for Pickup");
         heading.setFont(new Font("Serif", Font.BOLD, 20));

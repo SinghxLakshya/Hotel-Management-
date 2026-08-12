@@ -17,7 +17,6 @@ public class Search extends JFrame implements ActionListener {
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel heading = new JLabel("Search Rooms");
         heading.setFont(new Font("Serif", Font.BOLD, 20));

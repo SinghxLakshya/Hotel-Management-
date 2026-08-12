@@ -15,7 +15,6 @@ public class Updateroom extends JFrame implements ActionListener {
     public Updateroom() {
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Heading
         JLabel heading = new JLabel("Update Room Status");
