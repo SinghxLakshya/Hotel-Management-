@@ -16,7 +16,6 @@ public class Checkout extends JFrame implements ActionListener {
     public Checkout() {
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Title
         JLabel text = new JLabel("Checkout");
