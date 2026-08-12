@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener {
-    JMenuItem ademp, adrms, addrv, recep;
+    JMenuItem ademp, adrms, addrv, recep,rmemp,rmdrv,upemp,updrv;
 
     public Dashboard() {
 
@@ -61,6 +61,26 @@ public class Dashboard extends JFrame implements ActionListener {
         addrv.addActionListener(this);
         ad.add(addrv);
 
+        rmemp = new JMenuItem("Remove Employee");
+        rmemp.setForeground(new Color(0, 123, 255)); 
+        rmemp.addActionListener(this);
+        ad.add(rmemp);
+
+        rmdrv = new JMenuItem("Remove Drivers");
+        rmdrv.setForeground(new Color(0, 123, 255));
+        rmdrv.addActionListener(this);
+        ad.add(rmdrv);
+
+        upemp = new JMenuItem("Update Employee");
+        upemp.setForeground(new Color(0, 123, 255));
+        upemp.addActionListener(this);
+        ad.add(upemp);
+
+        updrv = new JMenuItem("Update Drivers");
+        updrv.setForeground(new Color(0, 123, 255));
+        updrv.addActionListener(this);
+        ad.add(updrv);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -77,8 +97,31 @@ public class Dashboard extends JFrame implements ActionListener {
             new Addroom();
         } else if (ae.getSource() == addrv) {
             new Adddriver();
-        } else if (ae.getSource() == recep) {
+        }
+         else if (ae.getSource() == recep) {
             new Reception();
         }
+         else if (ae.getSource() == rmemp) {
+            new DeleteEmp();
+        }
+         else if (ae.getSource() == rmdrv) {
+            new DeleteDriver();
+        }
+         else if (ae.getSource() == upemp) {
+            new UpdateEmp();
+        }
+         else if (ae.getSource() ==updrv ) {
+            new UpdateDriver();
+        }
+
+
+
+
+
+
+
+
+
+        
     }
 }
