@@ -82,12 +82,7 @@ public class Adddriver extends JFrame implements ActionListener {
         vehiclenoField.setBackground(Color.white);
         add(vehiclenoField);
 
-        // String bd[] = { "Ford", "Hyundai", "Mahindra", "Mitsubishi", "Maruti",
-        // "Renault", "Tata", "Toyota" };
-        // bedcjb = new JComboBox<>(bd);
-        // bedcjb.setBounds(200, 240, 150, 30);
-        // bedcjb.setBackground(Color.white);
-        // add(bedcjb);
+    
 
         JLabel rmsts = new JLabel("Car Model");
         rmsts.setFont(new Font("tahoma", Font.PLAIN, 18));
@@ -98,11 +93,7 @@ public class Adddriver extends JFrame implements ActionListener {
         crmField.setBackground(Color.white);
         add(crmField);
 
-        // String rm[] = { "AC", "Non Ac", "Cooler" };
-        // rmcjb = new JComboBox<>(rm);
-        // rmcjb.setBounds(200, 300, 150, 30);
-        // rmcjb.setBackground(Color.white);
-        // add(rmcjb);
+        
 
         JLabel avl = new JLabel("Availablity");
         avl.setFont(new Font("tahoma", Font.PLAIN, 18));
